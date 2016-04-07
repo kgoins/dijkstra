@@ -5,8 +5,14 @@ import java.io.*;
 class GraphBuilder {
 	public GraphBuilder() {}
 
-	// from an array of strings
-	public ArrayList<String[]> loadTxtFile(String filepath) {
+	public Graph parseTxtFile(String filepath) {
+		ArrayList<String[]> file = loadTxtFile(filepath);
+
+		Graph graph = new Graph()
+
+	}
+
+	private ArrayList<String[]> loadTxtFile(String filepath) {
 		ArrayList<String[]> file = new ArrayList<String[]>();
 
 		try (BufferedReader br = new BufferedReader(new FileReader(filepath))) {
@@ -20,7 +26,7 @@ class GraphBuilder {
 	}
 
 	// Returns everything the builder needs to construct the graph
-	public HashSet<Node> parseFile(ArrayList<String[]> file) {
+	private HashSet<Node> parseFile(ArrayList<String[]> file) {
 		HashSet<Node> nodes = createNodes(file);
 		nodes = setNodeNeighbors(nodes, file);
 
