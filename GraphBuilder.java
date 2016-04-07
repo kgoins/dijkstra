@@ -2,51 +2,20 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.io.*;
 
-/* Parser works on a file created by a Builder
-	Builder contains multiple methods (or classes)
-	for handeling each filetype you want to support
-
-	bottom line: abstract out the parser
-*/
-
-
 class GraphBuilder {
 	public GraphBuilder() {}
 
-	public Graph parseTxtFile(String filepath) {
-		ArrayList<String[]> file = loadTxtFile(filepath);
-
-		Graph graph = new Graph()
-
-	}
-
-	private ArrayList<String[]> loadTxtFile(String filepath) {
-		ArrayList<String[]> file = new ArrayList<String[]>();
-
-		try (BufferedReader br = new BufferedReader(new FileReader(filepath))) {
-			String line;
-			while ((line = br.readLine()) != null) {
-				file.add(line.split(","));
-			}
-		} catch(IOException e) {System.out.println(e.getStackTrace());}
-
-		return file;
-	}
-
-	// Returns everything the builder needs to construct the graph
-	private HashSet<Node> parseFile(ArrayList<String[]> file) {
-		HashSet<Node> nodes = createNodes(file);
-		nodes = setNodeNeighbors(nodes, file);
-
-		return nodes;
-	}
-
 	// String[] format: [key,n1,c1,n2,c2,...]
-	public Graph buildGraph(HashSet<Node> nodes, Node source) {
+	public Graph build(ArrayList<String[]> file) {
+        HashSet<Node> nodes = new HashSet<Node>();
+        Node source = createNode(file.get(0));
+
+        for(String[] line : file)
+        	nodes.put(createNode(line));
+
+        nodes = setNodeNeighbors(nodes, file);
+
 		Graph graph = new Graph(source, nodes);
-
-		graph.setSource(source);
-
 		return graph;
 	}
 }
