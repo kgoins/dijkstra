@@ -2,6 +2,14 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.io.*;
 
+/* Parser works on a file created by a Builder
+	Builder contains multiple methods (or classes)
+	for handeling each filetype you want to support
+
+	bottom line: abstract out the parser
+*/
+
+
 class GraphBuilder {
 	public GraphBuilder() {}
 
