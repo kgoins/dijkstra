@@ -3,7 +3,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 
 class Graph {
-    private ArrayList<Node> nodes;
+    private HashSet<Node> nodes;
     private Node source;
 
     private HashMap<Node, Integer> dist;
@@ -11,14 +11,14 @@ class Graph {
 
     public Graph() {
     	source = null;
-    	nodes = new ArrayList<Node>();
+    	nodes = new HashSet<Node>();
 
     	dist = new HashMap<Node, Integer>();
     	prevHop = new HashMap<Node, Node>();
     	resetHashMaps();
     }
-    
-    public Graph(Node source, ArrayList<Node> nodes) {
+
+    public Graph(Node source, HashSet<Node> nodes) {
         this.source = source;
         this.nodes = nodes;
 
@@ -48,6 +48,7 @@ class Graph {
             prevHop.put(node, null);
         }
     }
+
     private Node minDistEntry() {
         int minCost = Integer.MAX_VALUE;
         Node minNode = null;
