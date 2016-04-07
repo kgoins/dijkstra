@@ -4,9 +4,9 @@ class Node {
     private String key;
     private HashMap<Node, Integer> neighbors;
 
-    public Node(String key, HashMap<Node, Integer> neighbors) {
+    public Node(String key) {
         this.key = key;
-        this.neighbors = neighbors;
+        neighbors = new HashMap<Node, Integer>();
     }
 
     public String toString() {
@@ -14,6 +14,10 @@ class Node {
        for(Node neighbor : getNeighbors()) 
             nodeString += "   " + neighbor.getKey() + " " + neighbors.get(neighbor) + "\n";
        return nodeString;
+    }
+
+    public void addNeighbor(Node node, int cost) {
+        neighbors.put(node,cost);
     }
 
     public String getKey() { return key; }
