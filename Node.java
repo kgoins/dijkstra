@@ -9,6 +9,15 @@ class Node {
         this.neighbors = neighbors;
     }
 
+    public String toString() {
+       String nodeString = key + "\n";
+       for(Node neighbor : getNeighbors()) 
+            nodeString += "   " + neighbor.getKey() + " " + neighbors.get(neighbor) + "\n";
+       return nodeString;
+    }
+
+    public String getKey() { return key; }
+
     public Node[] getNeighbors() {
         return (Node[]) neighbors.keySet().toArray();
     }
@@ -17,7 +26,7 @@ class Node {
         return neighbors.containsKey(node);
     }
 
-    int costTo(Node node) {
+    public int costTo(Node node) {
         return neighbors.get(node);
     }
 }

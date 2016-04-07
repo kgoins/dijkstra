@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 
 class Graph {
     private ArrayList<Node> nodes;
@@ -11,7 +12,18 @@ class Graph {
     public Graph(Node source, ArrayList<Node> nodes) {
         this.source = source;
         this.nodes = nodes;
-        resetMaps();
+
+        dist = new HashMap<Node, Integer>();
+        prevHop = new HashMap<Node, Node>();
+
+        resetHashMaps();
+    }
+
+    public String toString() {
+    	String graphString = "";
+    	for(Node node : nodes)
+    		graphString += node.toString();
+    	return graphString;
     }
 
     public void setSource(Node source) {
@@ -19,17 +31,12 @@ class Graph {
         runDijkstra();
     }
 
-    private void resetMaps() {
+    private void resetHashMaps() {
         for(Node node : nodes) {
             dist.put(node, Integer.MAX_VALUE);
             prevHop.put(node, null);
         }
     }
-
-    public void runDijkstra() {
-        resetMaps();
-    }
-
     private Node minDistEntry() {
         int minCost = Integer.MAX_VALUE;
         Node minNode = null;
@@ -41,7 +48,14 @@ class Graph {
                 minNode = node;
             }
         }
-
         return minNode;
     }
+
+    public void runDijkstra() {
+        resetHashMaps();
+
+        HashSet<Node> visited = new HashSet<Node>();
+    }
+
+
 }
