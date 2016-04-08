@@ -3,7 +3,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 
 class Graph {
-    private HashSet<Node> nodes;
+    private ArrayList<Node> nodes;
     private Node source;
 
     private HashMap<Node, Integer> dist;
@@ -11,14 +11,14 @@ class Graph {
 
     public Graph() {
     	source = null;
-    	nodes = new HashSet<Node>();
+    	nodes = new ArrayList<Node>();
 
     	dist = new HashMap<Node, Integer>();
     	prevHop = new HashMap<Node, Node>();
     	resetHashMaps();
     }
 
-    public Graph(Node source, HashSet<Node> nodes) {
+    public Graph(Node source, ArrayList<Node> nodes) {
         this.source = source;
         this.nodes = nodes;
 
