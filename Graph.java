@@ -35,8 +35,34 @@ class Graph {
     public void runDijkstra() {
         resetHashMaps();
         HashSet<Node> visited = new HashSet<Node>();
+        visited.add(source);
+
+        for(Node node : nodes) {
+            if (source.hasNeighbor(node)) {
+                dist.put(node, source.costTo(node));
+                prevHop.put(node, node);
+            }
+        }
+
+        System.out.println(visited);
+        while(visited.size() != nodes.size()) {
+            Node target = minDistEntry();
+            for(Node neighbor : target.getNeighbors()) {
+                if (!visited.contains(target)) {
+                    int neighborCost = dist.get(neighbor);
+                    int altCost = dist.get(target) + target.costTo(neighbor);
+
+                    neighborCost = (neighborCost < altCost) ? neighborCost:altCost;
+                    dist.put(neighbor, neighborCost);
+                }
+                visited.add(target);
+            }
+        }
     }
 
+
+    // Interface - gets
+    public int size() { return nodes.size(); }
 
     // Interface - Sets
     public void addNode(Node node) { nodes.add(node); }
@@ -49,8 +75,19 @@ class Graph {
     // Util
     private void resetHashMaps() {
         for(Node node : nodes) {
-            dist.put(node, Integer.MAX_VALUE);
-            prevHop.put(node, null);
+            int initCost;
+            Node prevNode;
+
+            if (node == source) {
+                initCost = 0;
+                prevNode = source;
+            } else {
+                initCost = Integer.MAX_VALUE;
+                prevNode = null;
+            }
+
+            dist.put(node, initCost);
+            prevHop.put(node, prevNode);
         }
     }
 
@@ -84,7 +121,7 @@ class Graph {
         String nodeDist = "";
         for(Node node : dist.keySet()) {
             nodeKeys += String.format("%-16s", node.getKey());
-            nodeDist += String.format("%-16s", (node == source) ? "0" : dist.get(node) + " ");
+            nodeDist += String.format("%-16s", dist.get(node) + " ");
         }
         return "Distance Vector\n" + nodeKeys + "\n" + nodeDist + "\n\n";
     }
@@ -94,7 +131,13 @@ class Graph {
         String nodePrev= "";
         for(Node node : dist.keySet()) {
             nodeKeys += String.format("%-16s",node.getKey());
-            nodePrev += String.format("%-16s",(node == source) ? "-" : prevHop.get(node));
+
+            Node prevNode = prevHop.get(node);
+            if(prevNode != null)
+                nodePrev += String.format("%-16s", prevNode.getKey());
+            else
+                nodePrev += String.format("%-16s", prevNode);
+
         }
         return "Previous Hop\n" + nodeKeys + "\n" + nodePrev + "\n\n";
     }
@@ -104,6 +147,8 @@ class Graph {
     public static void main(String[] args) {
         GraphBuilder builder = new GraphBuilder();
         Graph graph = builder.build("graphfile.test");
+
+        // graph.runDijkstra();
         System.out.println(graph);
     }
 }
