@@ -40,22 +40,26 @@ class Graph {
         for(Node node : nodes) {
             if (source.hasNeighbor(node)) {
                 dist.put(node, source.costTo(node));
-                prevHop.put(node, node);
+                prevHop.put(node, source);
             }
         }
 
-        System.out.println(visited);
         while(visited.size() != nodes.size()) {
-            Node target = minDistEntry();
-            for(Node neighbor : target.getNeighbors()) {
-                if (!visited.contains(target)) {
-                    int neighborCost = dist.get(neighbor);
-                    int altCost = dist.get(target) + target.costTo(neighbor);
+            for(Node node : nodes) {
+                if (!visited.contains(node)) {
+                    node = minUnvisited(visited);
+                    visited.add(node);
+                    for(Node neighbor : node.getNeighbors()) {
+                        if(!visited.contains(neighbor)) {
+                            int neighborCost = dist.get(neighbor);
+                            int altCost = dist.get(node) + node.costTo(neighbor);
 
-                    neighborCost = (neighborCost < altCost) ? neighborCost:altCost;
-                    dist.put(neighbor, neighborCost);
+                            neighborCost = (neighborCost < altCost) ? neighborCost:altCost;
+                            dist.put(neighbor, neighborCost);
+                            prevHop.put(neighbor, node);
+                        }
+                    }
                 }
-                visited.add(target);
             }
         }
     }
@@ -91,15 +95,17 @@ class Graph {
         }
     }
 
-    private Node minDistEntry() {
+    private Node minUnvisited(HashSet<Node> visited) {
         int minCost = Integer.MAX_VALUE;
         Node minNode = null;
 
         for(Node node : nodes) {
-            int cost = dist.get(node);
-            if(cost < minCost) {
-                minCost = cost;
-                minNode = node;
+            if(!visited.contains(node)) {
+                int cost = dist.get(node);
+                if(cost <= minCost) {
+                    minCost = cost;
+                    minNode = node;
+                }
             }
         }
         return minNode;
@@ -148,7 +154,7 @@ class Graph {
         GraphBuilder builder = new GraphBuilder();
         Graph graph = builder.build("graphfile.test");
 
-        // graph.runDijkstra();
+        graph.runDijkstra();
         System.out.println(graph);
     }
 }
