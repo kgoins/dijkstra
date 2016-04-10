@@ -72,12 +72,33 @@ class Graph {
     // To String
     public String toString() {
         String graphString = "";
-        graphString += dist.toString() + "\n";
-        graphString += prevHop.toString() + "\n";
+        graphString += printDist();
+        graphString += printPrevHop();
         for(Node node : nodes)
             graphString += node.toString();
         return graphString;
     }
+
+    private String printDist() {
+        String nodeKeys = "";
+        String nodeDist = "";
+        for(Node node : dist.keySet()) {
+            nodeKeys += String.format("%-16s", node.getKey());
+            nodeDist += String.format("%-16s", (node == source) ? "0" : dist.get(node) + " ");
+        }
+        return "Distance Vector\n" + nodeKeys + "\n" + nodeDist + "\n\n";
+    }
+
+    private String printPrevHop() {
+        String nodeKeys = "";
+        String nodePrev= "";
+        for(Node node : dist.keySet()) {
+            nodeKeys += String.format("%-16s",node.getKey());
+            nodePrev += String.format("%-16s",(node == source) ? "-" : prevHop.get(node));
+        }
+        return "Previous Hop\n" + nodeKeys + "\n" + nodePrev + "\n\n";
+    }
+
 
     // Main
     public static void main(String[] args) {
