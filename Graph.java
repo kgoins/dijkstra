@@ -7,6 +7,7 @@ class Graph {
     private HashSet<Node> nodes;
     private Node source;
 
+    private boolean dijkstraRun = false;
     private HashMap<Node, Integer> dist;
     private HashMap<Node, Node> prevHop;
 
@@ -32,17 +33,13 @@ class Graph {
 
 
     // Interface
-    @Override
-    public boolean equals(Object obj) {
-        if (obj == null)
-            return false;
-
-        Graph target = (Graph) obj;
-        return (nodes.equals(target)) ? true:false;
+    public ArrayList<Node> getPathTo(String nodeKey) {
+        if(!dijkstraRun)
+            runDijkstra();
+        ArrayList<Node> path = new ArrayList<Node>();
+        Node node = getNode(nodeKey);
+        return findPath(node, path);
     }
-
-    @Override
-    public int hashCode() {return nodes.hashCode() * 95;}
 
     public void runDijkstra() {
         resetHashMaps();
@@ -74,6 +71,7 @@ class Graph {
                 }
             }
         }
+        dijkstraRun = true;
     }
 
 
@@ -81,15 +79,30 @@ class Graph {
     public int size() { return nodes.size(); }
     public HashSet<Node> getNodes() {return nodes;}
 
+    public Node getNode(String nodeKey) {return nodes.get(new Node(nodeKey));}
+    public boolean contains(String nodeKey) {
+        return nodes.contains(new Node(nodeKey));
+    }
+
     // Interface - Sets
-    public void addNode(Node node) { nodes.add(node); }
+    public void addNode(Node node) { nodes.add(node); dijkstraRun = false;}
     public void setSource(Node source) {
         this.source = source;
+        dijkstraRun = false;
         runDijkstra();
     }
 
 
     // Util
+    private ArrayList<Node> findPath(Node node, ArrayList<Node> path) {
+        Node prevNode = prevHop.get(node);
+        if(node == source)
+            return path;
+        else {
+            path.add(prevNode);
+            return findPath(prevNode, path);
+        }
+    }
     private void resetHashMaps() {
         for(Node node : nodes) {
             int initCost;
@@ -123,6 +136,20 @@ class Graph {
         }
         return minNode;
     }
+
+
+    // equals & hashCode
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null)
+            return false;
+
+        Graph target = (Graph) obj;
+        return (nodes.equals(target)) ? true:false;
+    }
+
+    @Override
+    public int hashCode() {return nodes.hashCode() * 95;}
 
 
     // To String
