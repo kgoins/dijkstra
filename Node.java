@@ -13,13 +13,9 @@ class Node {
     }
 
     // Interface
-    public boolean hasNeighbor(Node node) {
-        return neighbors.containsKey(node);
-    }
+    public boolean hasNeighbor(Node node) { return neighbors.containsKey(node); }
+    public int costTo(Node node) { return neighbors.get(node); }
 
-    public int costTo(Node node) {
-        return neighbors.get(node);
-    }
 
     // Interface - Gets
     public String getKey() { return key; }
@@ -30,14 +26,14 @@ class Node {
         return keyArray;
     }
 
+
     // Interface - Sets
-    public void addNeighbor(Node node, int cost) {
-        neighbors.put(node,cost);
-    }
+    public void addNeighbor(Node node, int cost) { neighbors.put(node,cost); }
+
 
     // To String
     public String toString() {
-       String nodeString = key + "\n";
+       String nodeString = "Key: " + key + "\n";
        for(Node neighbor : getNeighbors())
             nodeString += "   " + neighbor.getKey() + " " + neighbors.get(neighbor) + "\n";
        return nodeString;

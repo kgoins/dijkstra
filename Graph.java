@@ -3,12 +3,14 @@ import java.util.HashMap;
 import java.util.HashSet;
 
 class Graph {
+    // Data
     private ArrayList<Node> nodes;
     private Node source;
 
     private HashMap<Node, Integer> dist;
     private HashMap<Node, Node> prevHop;
 
+    // Constructors
     public Graph() {
     	source = null;
     	nodes = new ArrayList<Node>();
@@ -28,20 +30,23 @@ class Graph {
         resetHashMaps();
     }
 
-    public String toString() {
-    	String graphString = "";
-    	for(Node node : nodes)
-    		graphString += node.toString();
-    	return graphString;
+
+    // Interface
+    public void runDijkstra() {
+        resetHashMaps();
+        HashSet<Node> visited = new HashSet<Node>();
     }
 
-    public void addNode(Node node) { nodes.add(node); }
 
+    // Interface - Sets
+    public void addNode(Node node) { nodes.add(node); }
     public void setSource(Node source) {
         this.source = source;
         runDijkstra();
     }
 
+
+    // Util
     private void resetHashMaps() {
         for(Node node : nodes) {
             dist.put(node, Integer.MAX_VALUE);
@@ -63,9 +68,21 @@ class Graph {
         return minNode;
     }
 
-    public void runDijkstra() {
-        resetHashMaps();
 
-        HashSet<Node> visited = new HashSet<Node>();
+    // To String
+    public String toString() {
+        String graphString = "";
+        graphString += dist.toString() + "\n";
+        graphString += prevHop.toString() + "\n";
+        for(Node node : nodes)
+            graphString += node.toString();
+        return graphString;
+    }
+
+    // Main
+    public static void main(String[] args) {
+        GraphBuilder builder = new GraphBuilder();
+        Graph graph = builder.build("graphfile.test");
+        System.out.println(graph);
     }
 }
