@@ -32,6 +32,13 @@ class Graph {
 
 
     // Interface
+    // public boolean equals(Graph target) {
+    //     boolean equals = true;
+    //     ArrayList<Node> targetNodes = target.getNodes();
+    //     for(Node node : nodes)
+    //         if()
+    // }
+
     public void runDijkstra() {
         resetHashMaps();
         HashSet<Node> visited = new HashSet<Node>();
@@ -67,6 +74,7 @@ class Graph {
 
     // Interface - gets
     public int size() { return nodes.size(); }
+    public ArrayList<Nodes> getNodes() {return nodes;}
 
     // Interface - Sets
     public void addNode(Node node) { nodes.add(node); }
