@@ -118,7 +118,7 @@ class Graph {
         graphString += printDist();
         graphString += printPrevHop();
         for(Node node : nodes)
-            graphString += node.toString();
+            graphString += node.toString() + ": ";
         return graphString;
     }
 
@@ -148,13 +148,4 @@ class Graph {
         return "Previous Hop\n" + nodeKeys + "\n" + nodePrev + "\n\n";
     }
 
-
-    // Main
-    public static void main(String[] args) {
-        GraphBuilder builder = new GraphBuilder();
-        Graph graph = builder.build("graphfile.test");
-
-        graph.runDijkstra();
-        System.out.println(graph);
-    }
 }

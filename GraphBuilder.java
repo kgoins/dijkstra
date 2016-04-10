@@ -91,9 +91,4 @@ class GraphBuilder {
         return builderString;
     }
 
-    public static void main(String[] args) {
-        GraphBuilder builder = new GraphBuilder();
-        builder.build("harderTest.graphfile");
-        System.out.println(builder);
-    }
 }

@@ -33,4 +33,13 @@ class Node {
 
     // To String
     public String toString() { return key; }
+    public String neighborString() {
+        String neighborString = "";
+        for(Node node : getNeighbors())
+            neighborString += node + ", ";
+
+        neighborString = neighborString.substring(0, neighborString.length() -2);
+        return neighborString;
+    }
+
 }
