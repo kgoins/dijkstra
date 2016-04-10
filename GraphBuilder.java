@@ -1,6 +1,13 @@
 import java.util.ArrayList;
 import java.io.*;
 
+/* GraphFile syntax:
+    nodeKey  neighbor1,cost1 neighbor2,cost2 ...
+    nodeKey2 neighbor1,cost1 neighbor2,cost2 ...
+
+    Note: the source node is assumed to be the first node in the graphFile
+*/
+
 class GraphBuilder {
     // Data
     private ArrayList<Node> nodes;

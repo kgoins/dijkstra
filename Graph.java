@@ -115,10 +115,11 @@ class Graph {
     // To String
     public String toString() {
         String graphString = "";
-        graphString += printDist();
-        graphString += printPrevHop();
+        graphString += printDist() + "\n\n";
+        graphString += printPrevHop() + "\n\n";
+        graphString += "Nodes:\n";
         for(Node node : nodes)
-            graphString += node.toString() + ": ";
+            graphString += node.toString() + ": " + node.neighborString() + "\n";
         return graphString;
     }
 
@@ -129,7 +130,7 @@ class Graph {
             nodeKeys += String.format("%-16s", node.getKey());
             nodeDist += String.format("%-16s", dist.get(node) + " ");
         }
-        return "Distance Vector\n" + nodeKeys + "\n" + nodeDist + "\n\n";
+        return "Distance Vector\n" + nodeKeys + "\n" + nodeDist;
     }
 
     private String printPrevHop() {
@@ -145,7 +146,7 @@ class Graph {
                 nodePrev += String.format("%-16s", prevNode);
 
         }
-        return "Previous Hop\n" + nodeKeys + "\n" + nodePrev + "\n\n";
+        return "Previous Hop\n" + nodeKeys + "\n" + nodePrev;
     }
 
 }
