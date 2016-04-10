@@ -32,12 +32,17 @@ class Graph {
 
 
     // Interface
-    // public boolean equals(Graph target) {
-    //     boolean equals = true;
-    //     ArrayList<Node> targetNodes = target.getNodes();
-    //     for(Node node : nodes)
-    //         if()
-    // }
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null)
+            return false;
+
+        Graph target = (Graph) obj;
+        return (nodes.equals(target)) ? true:false;
+    }
+
+    @Override
+    public int hashCode() {return nodes.hashCode() * 95;}
 
     public void runDijkstra() {
         resetHashMaps();
