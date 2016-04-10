@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.io.*;
 
 /* GraphFile syntax:
@@ -26,7 +27,11 @@ class GraphBuilder {
         setNeighbors();
 
         Node source = nodes.get(0);
-        return new Graph(source, nodes);
+        HashSet<Node> graphNodes = new HashSet<Node>();
+        for (Node node : nodes)
+            graphNodes.add(node);
+
+        return new Graph(source, graphNodes);
     }
 
 

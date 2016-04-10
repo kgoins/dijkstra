@@ -4,7 +4,7 @@ import java.util.Set;
 class Node {
     // Data
     private String key; // Nodes are uniquely defined by their keys
-    private HashMap<Node, Integer> neighbors;
+    private HashMap<Node,Integer> neighbors;
 
     // Constructor
     public Node(String key) {
@@ -33,12 +33,7 @@ class Node {
 
     // Interface - Gets
     public String getKey() { return key; }
-
-    public Node[] getNeighbors() {
-        Set<Node> keys = neighbors.keySet();
-        Node[] keyArray = keys.toArray(new Node[keys.size()]);
-        return keyArray;
-    }
+    public Set<Node> getNeighbors() { return neighbors.keySet(); }
 
 
     // Interface - Sets

@@ -4,7 +4,7 @@ import java.util.HashSet;
 
 class Graph {
     // Data
-    private ArrayList<Node> nodes;
+    private HashSet<Node> nodes;
     private Node source;
 
     private HashMap<Node, Integer> dist;
@@ -13,19 +13,19 @@ class Graph {
     // Constructors
     public Graph() {
     	source = null;
-    	nodes = new ArrayList<Node>();
+    	nodes = new HashSet<Node>();
 
     	dist = new HashMap<Node, Integer>();
     	prevHop = new HashMap<Node, Node>();
     	resetHashMaps();
     }
 
-    public Graph(Node source, ArrayList<Node> nodes) {
+    public Graph(Node source, HashSet<Node> nodes) {
         this.source = source;
         this.nodes = nodes;
 
-        dist = new HashMap<Node, Integer>();
-        prevHop = new HashMap<Node, Node>();
+        dist = new HashMap<Node,Integer>();
+        prevHop = new HashMap<Node,Node>();
 
         resetHashMaps();
     }
@@ -74,7 +74,7 @@ class Graph {
 
     // Interface - gets
     public int size() { return nodes.size(); }
-    public ArrayList<Nodes> getNodes() {return nodes;}
+    public HashSet<Node> getNodes() {return nodes;}
 
     // Interface - Sets
     public void addNode(Node node) { nodes.add(node); }
