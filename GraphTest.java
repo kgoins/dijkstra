@@ -6,12 +6,22 @@ class GraphTest {
        Graph easyTest = builder.build("test.graphfile");
        Graph harderTest = builder.build("harderTest.graphfile");
 
-       easyTest.getPathTo("a");
-       harderTest.runDijkstra();
+       ArrayList<Node> easyPath = easyTest.getPathTo("c");
+       ArrayList<Node> harderPath = harderTest.getPathTo("h");
 
-       System.out.println(easyTest);
-       System.out.println();
-       System.out.println(harderTest);
+       for(Node node : easyPath)
+        System.out.print(node + " ");
 
-    }
+        System.out.println();
+
+       for(Node node : harderPath)
+        System.out.print(node + " ");
+
+        System.out.println();
+
+       // System.out.println(easyTest);
+       // System.out.println();
+       // System.out.println(harderTest);
+
+   }
 }

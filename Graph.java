@@ -33,11 +33,18 @@ class Graph {
 
 
     // Interface
+    public boolean contains(String nodeKey) {
+        return nodes.contains(new Node(nodeKey));
+    }
+
     public ArrayList<Node> getPathTo(String nodeKey) {
         if(!dijkstraRun)
             runDijkstra();
-        ArrayList<Node> path = new ArrayList<Node>();
+
         Node node = getNode(nodeKey);
+        ArrayList<Node> path = new ArrayList<Node>();
+        path.add(node);
+
         return findPath(node, path);
     }
 
@@ -79,10 +86,13 @@ class Graph {
     public int size() { return nodes.size(); }
     public HashSet<Node> getNodes() {return nodes;}
 
-    public Node getNode(String nodeKey) {return nodes.get(new Node(nodeKey));}
-    public boolean contains(String nodeKey) {
-        return nodes.contains(new Node(nodeKey));
+    public Node getNode(String nodeKey) {
+        for (Node node : nodes)
+            if(node.getKey().equals(nodeKey))
+                return node;
+        return null;
     }
+
 
     // Interface - Sets
     public void addNode(Node node) { nodes.add(node); dijkstraRun = false;}
@@ -97,7 +107,7 @@ class Graph {
     private ArrayList<Node> findPath(Node node, ArrayList<Node> path) {
         Node prevNode = prevHop.get(node);
         if(node == source)
-            return path;
+            return Collections.reverse(path);
         else {
             path.add(prevNode);
             return findPath(prevNode, path);
