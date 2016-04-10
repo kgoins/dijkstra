@@ -36,7 +36,7 @@ class Node {
     public String neighborString() {
         String neighborString = "";
         for(Node node : getNeighbors())
-            neighborString += node + ", ";
+            neighborString += node + "," + costTo(node) + ", ";
 
         neighborString = neighborString.substring(0, neighborString.length() -2);
         return neighborString;
