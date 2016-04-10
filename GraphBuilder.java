@@ -35,13 +35,15 @@ class GraphBuilder {
 
     private String[] parseFileLine(String line) {
         String[] lineArray = line.split(" ");
-        String[] nodeLine = new String[lineArray.length*2];
+        String[] nodeLine = new String[(lineArray.length*2)-1];
+        nodeLine[0] = lineArray[0];
 
-        for (int i = 0; i < lineArray.length; i++) {
+        for (int i = 1; i < lineArray.length; i++) {
             String[] pair = lineArray[i].split(",");
             nodeLine[i*2] = pair[1];
             nodeLine[(i*2)-1] = pair[0];
         }
+
         return nodeLine;
     }
 
@@ -77,12 +79,21 @@ class GraphBuilder {
     // toString
     public String toString() {
         String builderString = "";
+        builderString += "Nodes: " + nodes + "\n";
+        builderString += "File:\n";
+
+        for(String[] line : graphfile) {
+            for(String str : line)
+                builderString += str + " ";
+            builderString += "\n";
+        }
+
         return builderString;
     }
 
-    private String nodeString() {
-        String nodeString = "";
-        for()
-        return nodeString;
+    public static void main(String[] args) {
+        GraphBuilder builder = new GraphBuilder();
+        builder.build("harderTest.graphfile");
+        System.out.println(builder);
     }
 }
