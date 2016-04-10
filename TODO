@@ -1,5 +1,4 @@
 TODO
 • Add saveGraph feature to GraphBuilder
-• Abstract out Dijkstra's algorithm into its own class
 • Add check for link cost symmetry to GraphBuilder
 • Graph should use HashMap<String,Node> instead of HashSet

@@ -31,7 +31,7 @@ class GraphBuilder {
         for (Node node : nodes)
             graphNodes.add(node);
 
-        return new Graph(source, graphNodes);
+        return new Graph(graphNodes, source);
     }
 
 
