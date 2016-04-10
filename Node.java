@@ -32,10 +32,5 @@ class Node {
 
 
     // To String
-    public String toString() {
-       String nodeString = "Key: " + key + "\n";
-       for(Node neighbor : getNeighbors())
-            nodeString += "   " + neighbor.getKey() + " " + neighbors.get(neighbor) + "\n";
-       return nodeString;
-    }
+    public String toString() { return key; }
 }

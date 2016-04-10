@@ -29,8 +29,20 @@ class GraphBuilder {
         try (BufferedReader br = new BufferedReader(new FileReader(filepath))) {
             String line;
             while ((line = br.readLine()) != null)
-               graphfile.add(line.split(","));
+                graphfile.add(parseFileLine(line));
         } catch(IOException e) {System.out.println(e.getStackTrace());}
+    }
+
+    private String[] parseFileLine(String line) {
+        String[] lineArray = line.split(" ");
+        String[] nodeLine = new String[lineArray.length*2];
+
+        for (int i = 0; i < lineArray.length; i++) {
+            String[] pair = lineArray[i].split(",");
+            nodeLine[i*2] = pair[1];
+            nodeLine[(i*2)-1] = pair[0];
+        }
+        return nodeLine;
     }
 
 
@@ -60,5 +72,17 @@ class GraphBuilder {
             if(node.getKey().equals(key))
                 target = node;
         return target;
+    }
+
+    // toString
+    public String toString() {
+        String builderString = "";
+        return builderString;
+    }
+
+    private String nodeString() {
+        String nodeString = "";
+        for()
+        return nodeString;
     }
 }
