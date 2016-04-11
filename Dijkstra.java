@@ -2,9 +2,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 
-import graph.Graph;
-import graph.Node;
-
 public class Dijkstra {
     // Data
     private Node source;
